@@ -20,12 +20,12 @@ get '/visit' do
 end
 
 post '/visit' do
-	add_to_clienlist(params[:username], params[:phone], params[:time], params[:barber])
+	add_to_clienlist(params[:username], params[:phone], params[:time], params[:barber], params[:colorpicker])
 erb :visit
 end
 
-def add_to_clienlist(name, phone, time, barber)
+def add_to_clienlist(name, phone, time, barber, color)
 	output = File.open './public/clientlist.txt', 'a'
-	output.write "Client #{name}, contact number: #{phone}, will be on #{time} to #{barber}\n"
+	output.write "Client #{name}, contact number: #{phone}, will be on #{time} to #{barber}. Paint to #{color}\n"
 	output.close
 end
