@@ -21,7 +21,16 @@ get '/visit' do
 end
 
 post '/visit' do
-	add_to_clienlist(params[:username], params[:phone], params[:time], params[:barber], params[:colorpicker])
+	@name = params[:username]
+	@phone =  params[:phone]
+	@time = params[:time]
+	@barber = params[:barber]
+	@color = params[:colorpicker]
+	if (@name||@phone||@time||@barber||@color).empty?
+		@error = "Заполните все параметры."
+		else
+		add_to_clienlist(@name, @phone, @time, @barber, @color)
+	end
 erb :visit
 end
 
