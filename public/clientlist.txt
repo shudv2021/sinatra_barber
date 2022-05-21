@@ -5,3 +5,5 @@ Client Маня, contact number: 34567, will be on 03.08.2004 to Дикий Дж
 Client , contact number: , will be on  to Дикий Джо. Paint to Дикий Джо
 Client fsdafsa, contact number: adfd, will be on dsfdf to Полудикий Джо. Paint to Полудикий Джо
 Client , contact number: , will be on  to Дикий Джо. Paint to #fbd75b
+Client , contact number: , will be on  to Дикий Джо. Paint to #46d6db
+Client , contact number: , will be on  to Полудикий Джо. Paint to #ffb878
