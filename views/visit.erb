@@ -2,17 +2,17 @@
 <form action='/visit' method='POST'>
   <div class="form-group">
     <label>Ваше имя </label>
-    <input name="username" type="text" class="form-control" id="visit_form_name" aria-describedby="emailHelp">
+    <input name="username" type="text" class="form-control" id="visit_form_name" aria-describedby="emailHelp" value="<%=@name%>">
   </div>
   
   <div class="form-group">
     <label>Ваш телефон </label>
-    <input name="phone" type="text" class="form-control" id="visit_form_phone" aria-describedby="emailHelp">
+    <input name="phone" type="text" class="form-control" id="visit_form_phone" aria-describedby="emailHelp" value="<%=@phone%>">
   </div>
   
   <div class="form-group">
     <label>Время записи </label>
-    <input name="time" type="text" class="form-control" id="visit_form_time" aria-describedby="emailHelp">
+    <input name="time" type="text" class="form-control" id="visit_form_time" aria-describedby="emailHelp" value="<%=@time%>">
   </div>
   
     

@@ -26,11 +26,12 @@ post '/visit' do
 	@time = params[:time]
 	@barber = params[:barber]
 	@color = params[:colorpicker]
-	if (@name||@phone||@time||@barber||@color).empty?
-		@error = "Заполните все параметры."
-		else
-		add_to_clienlist(@name, @phone, @time, @barber, @color)
-	end
+	errors = {:username =>'Заполните поле имя', :phone => 'Запишите номер телефона', :time => 'Выберите время'}
+	
+		@error = errors.select{ |key,_| params[key].empty?}.values.join(', ')
+
+		add_to_clienlist(@name, @phone, @time, @barber, @color) if @error.empty?
+
 erb :visit
 end
 
