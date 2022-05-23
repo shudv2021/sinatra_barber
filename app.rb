@@ -5,7 +5,7 @@ require 'pry'
 require 'sqlite3'
 
 configure do
-	db = get_db
+	db = SQLite3::Database.new 'barber_shop.db'
 	db.execute 'CREATE TABLE IF NOT EXISTS "users"
 														("id" INTEGER PRIMARY KEY AUTOINCREMENT,
 															"name" TEXT NOT NULL,
