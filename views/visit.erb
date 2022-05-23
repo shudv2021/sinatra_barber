@@ -19,9 +19,9 @@
   <div class="form-group">
     <label >Выберете парикмахера</label>
     <select name="barber" class="form-control" id="visit_form_barber">
-      <option>Дикий Джо</option>
-      <option>Полудикий Джо</option>
-      <option>Мумитроль</option>
+      <option <%=@barber == 'Дикий Джо' ? 'selected' : '' %>>Дикий Джо</option>
+      <option <%=@barber == 'Полудикий Джо' ? 'selected' : '' %>>Полудикий Джо</option>
+      <option <%=@barber == 'Мумитроль' ? 'selected' : '' %> >Мумитроль</option>
     </select>
   </div>
   
