@@ -5,8 +5,8 @@ require 'pry'
 require 'sqlite3'
 
 configure do
-	@db = SQLite3::Database.new 'barber_shop.db'
-	@db.execute 'CREATE TABLE "users"
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS "users"
 														("id" INTEGER PRIMARY KEY AUTOINCREMENT,
 															"name" TEXT NOT NULL,
 															"phone" TEXT NOT NULL,
@@ -43,13 +43,22 @@ post '/visit' do
 	
 		@error = errors.select{ |key,_| params[key].empty?}.values.join(', ')
 
-		add_to_clienlist(@name, @phone, @time, @barber, @color) if @error.empty?
+		add_to_db(@name, @phone, @time, @barber, @color) if @error.empty?
 
 erb :visit
 end
 
-def add_to_clienlist(name, phone, time, barber, color)
-	output = File.open './public/clientlist.txt', 'a'
-	output.write "Client #{name}, contact number: #{phone}, will be on #{time} to #{barber}. Paint to #{color}\n"
-	output.close
+def add_to_db(name, phone, time, barber, color)
+	db = get_db
+	db.execute 'insert into "users" (
+		name,
+		phone,
+		data,
+		barber,
+		color
+	) values(?, ?, ?, ?, ?)', [name, phone, time, barber, color]
+end
+
+def get_db
+	return SQLite3::Database.new 'barber_shop.db'
 end
