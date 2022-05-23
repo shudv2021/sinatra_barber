@@ -2,6 +2,19 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
+require 'sqlite3'
+
+configure do
+	@db = SQLite3::Database.new 'barber_shop.db'
+	@db.execute 'CREATE TABLE "users"
+														("id" INTEGER PRIMARY KEY AUTOINCREMENT,
+															"name" TEXT NOT NULL,
+															"phone" TEXT NOT NULL,
+															"data" TEXT NOT NULL,
+															"barber" TEXT NOT NULL,
+															"color" TEXT NOT NULL);
+							'
+end
 
 get '/' do
 	@error = "something wrong!"
