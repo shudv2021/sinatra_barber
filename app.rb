@@ -4,8 +4,12 @@ require 'sinatra/reloader'
 require 'pry'
 require 'sqlite3'
 
+def get_db
+	return SQLite3::Database.new 'barber_shop.db'
+end
+
 configure do
-	db = SQLite3::Database.new 'barber_shop.db'
+	db = get_db
 	db.execute 'CREATE TABLE IF NOT EXISTS "users"
 														("id" INTEGER PRIMARY KEY AUTOINCREMENT,
 															"name" TEXT NOT NULL,
@@ -59,6 +63,12 @@ def add_to_db(name, phone, time, barber, color)
 	) values(?, ?, ?, ?, ?)', [name, phone, time, barber, color]
 end
 
-def get_db
-	return SQLite3::Database.new 'barber_shop.db'
+get '/list' do
+	db  = get_db
+	@db_arr = []
+	db.results_as_hash = true
+	db.execute 'select * from users' do |row|
+	@db_arr << row
+	end
+	erb :list
 end

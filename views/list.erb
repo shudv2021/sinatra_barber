@@ -1,1 +1,7 @@
 <h1>Client List </h1>
+
+<%@db_arr.each do |row|%>
+<ul>
+<li> <%="#{row["name"]}====#{row["phone"]}====#{row["data"]}"%></li>
+</ul>
+<%end%>
