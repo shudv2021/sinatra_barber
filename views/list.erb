@@ -1,1 +1,24 @@
 <h1>Client List </h1>
+
+
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Имя</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Дата записи</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%@db_arr.each do |row|%>
+
+    <tr>
+      <td><%= row["name"]%>rk</td>
+      <td><%=row["phone"]%></td>
+      <td><%=row["data"]%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>

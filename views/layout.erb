@@ -19,11 +19,20 @@
 		<script src="jquery.simplecolorpicker.js"></script>
 		<link rel="stylesheet" href="jquery.simplecolorpicker.css">
 		
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="jquery.datetimepicker.full.min.js"></script>
+		<link rel="stylesheet" href="jquery.datetimepicker.min.css">
 		
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	
 		<script type="text/javascript">
-		$('select[name="colorpicker"]').simplecolorpicker();
+			$(function() {
+			$('#colorpicker').simplecolorpicker();
+				$('#visit_form_time').datetimepicker();
+		})
 		</script>
+		
+
+	
 	
 	</head>
 	<body>
@@ -44,7 +53,9 @@
 			    <ul class="nav navbar-nav">
 			      <li><a href="/about">About</a></li>
 			      <li><a href="/visit">Записаться</a></li>
+						<li><a href="/list">Показать запись</a></li>
 			      <li><a href="/contacts">Contacts</a></li>
+						
 			    </ul>
 			  </div><!--/.nav-collapse -->
 			</nav>
