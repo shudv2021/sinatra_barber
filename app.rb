@@ -4,6 +4,14 @@ require 'sinatra/reloader'
 require 'pry'
 require 'sqlite3'
 
+
+def is_barber? db, name
+barbers = db.execute 'SELECT barber_name FROM "barbers" '
+# barbers.include?(name)? true: false
+barbers.each {|notise| return true if notise['barber_name'] == name}
+false
+end
+
 def get_db
 	return SQLite3::Database.new 'barber_shop.db'
 end
@@ -18,6 +26,10 @@ configure do
 															"barber" TEXT NOT NULL,
 															"color" TEXT NOT NULL);
 							'
+							db.execute 'CREATE TABLE IF NOT EXISTS "barbers"
+																				("id" INTEGER PRIMARY KEY AUTOINCREMENT,
+																					"barber_name" TEXT NOT NULL);
+													'
 end
 
 get '/' do
@@ -33,15 +45,18 @@ get '/contacts' do
 end
 
 get '/visit' do
+	@barbers = get_db.execute 'SELECT barber_name FROM "barbers"'
 	erb :visit
 end
 
 post '/visit' do
+	@barbers = get_db.execute 'SELECT barber_name FROM "barbers"'
 	@name = params[:username]
 	@phone =  params[:phone]
 	@time = params[:time]
 	@barber = params[:barber]
 	@color = params[:colorpicker]
+
 	errors = {:username =>'Заполните поле имя', :phone => 'Запишите номер телефона', :time => 'Выберите время'}
 	
 		@error = errors.select{ |key,_| params[key].empty?}.values.join(', ')
@@ -63,11 +78,8 @@ def add_to_db(name, phone, time, barber, color)
 end
 
 get '/list' do
-	db  = get_db
-	@db_arr = []
+	db = get_db
 	db.results_as_hash = true
-	db.execute 'select * from users' do |row|
-	@db_arr << row
-	end
+	@db_arr = db.execute 'select * from users order by id desc'
 	erb :list
 end

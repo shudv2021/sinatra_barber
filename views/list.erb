@@ -9,6 +9,8 @@
       <th scope="col">Имя</th>
       <th scope="col">Телефон</th>
       <th scope="col">Дата записи</th>
+      <th scope="col">Парекмахер</th>
+      <th scope="col">Цвет покраски</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +20,12 @@
       <td><%= row["name"]%>rk</td>
       <td><%=row["phone"]%></td>
       <td><%=row["data"]%></td>
+      <td><%=row["barber"]%></td>
+      <td style = "background-color:<%=row["color"]%>"><%=row["color"]%></td>
+
     </tr>
     <%end%>
   </tbody>
 </table>
+
+<%=@answer%>
