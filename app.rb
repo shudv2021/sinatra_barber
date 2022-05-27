@@ -45,15 +45,18 @@ get '/contacts' do
 end
 
 get '/visit' do
+	@barbers = get_db.execute 'SELECT barber_name FROM "barbers"'
 	erb :visit
 end
 
 post '/visit' do
+	@barbers = get_db.execute 'SELECT barber_name FROM "barbers"'
 	@name = params[:username]
 	@phone =  params[:phone]
 	@time = params[:time]
 	@barber = params[:barber]
 	@color = params[:colorpicker]
+
 	errors = {:username =>'Заполните поле имя', :phone => 'Запишите номер телефона', :time => 'Выберите время'}
 	
 		@error = errors.select{ |key,_| params[key].empty?}.values.join(', ')
