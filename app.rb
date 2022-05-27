@@ -4,6 +4,14 @@ require 'sinatra/reloader'
 require 'pry'
 require 'sqlite3'
 
+
+def is_barber? db, name
+barbers = db.execute 'SELECT barber_name FROM "barbers" '
+# barbers.include?(name)? true: false
+barbers.each {|notise| return true if notise['barber_name'] == name} 
+false
+end
+
 def get_db
 	return SQLite3::Database.new 'barber_shop.db'
 end
@@ -18,6 +26,10 @@ configure do
 															"barber" TEXT NOT NULL,
 															"color" TEXT NOT NULL);
 							'
+							db.execute 'CREATE TABLE IF NOT EXISTS "barbers"
+																				("id" INTEGER PRIMARY KEY AUTOINCREMENT,
+																					"barber_name" TEXT NOT NULL);
+													'
 end
 
 get '/' do
