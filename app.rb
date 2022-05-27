@@ -63,11 +63,8 @@ def add_to_db(name, phone, time, barber, color)
 end
 
 get '/list' do
-	db  = get_db
-	@db_arr = []
+	db = get_db
 	db.results_as_hash = true
-	db.execute 'select * from users' do |row|
-	@db_arr << row
-	end
+	@db_arr = db.execute 'select * from users order by id desc'
 	erb :list
 end
