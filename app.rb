@@ -8,7 +8,7 @@ require 'sqlite3'
 def is_barber? db, name
 barbers = db.execute 'SELECT barber_name FROM "barbers" '
 # barbers.include?(name)? true: false
-barbers.each {|notise| return true if notise['barber_name'] == name} 
+barbers.each {|notise| return true if notise['barber_name'] == name}
 false
 end
 
